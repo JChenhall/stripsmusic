@@ -1,5 +1,3 @@
-
-
 .homeScreenContainer {
     height: 100vh;
     width:100vw;
@@ -10,29 +8,29 @@
 }
 
 .homeSection{
-    height:100%;
-    width:100%;
-}
+        height:100%;
+        width:100%;
+    }
 
 .topRow {
-height: 30%;
-display: flex;
-flex-flow: row wrap;
-justify-content: flex-start;
+    height: 30%;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
 }
+
 .middleRow{
     height: 30%;
-    
 }
+
 .bottomRow{
     height: 30%; 
 }
 
 .Logo{
-   height: fit-content;
-   width: fit-content;
+   height: 90%;
+   width: 90%;
 }
-
 
 .leftCol {
     display: flex;
@@ -40,11 +38,15 @@ justify-content: flex-start;
     align-items: center;
     text-align: center;
 }
+
 .Left{
     display: flex;
     flex-direction: row;
     padding-right: 20%;
     line-height: 0.9;
+    font-size: 2rem;
+    text-decoration: none;
+    color: #fff;
 }
 
 .rightCol {
@@ -53,17 +55,21 @@ justify-content: flex-start;
     align-items: center;
     text-align: center;
 }
+
 .Right{
     display: flex;
     flex-direction: row;
     padding-left: 20%;
     line-height: 0.9;
+    font-size: 2rem;
+    text-decoration: none;
+    color: #fff;
 }
-
-
 
 .pageLink {
     margin-bottom: 0;
+    color: #fff;
+    text-decoration: none;
 }
 
 .ArrowLeft {
@@ -85,21 +91,25 @@ justify-content: flex-start;
 }
 
 .Down{
-    
+    font-size: 2rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    text-decoration: none;
+    color: #fff;
 }
 
 .adminRow{
     height:10%;
-    color: #cdcdcd;
-    opacity: 0.1; 
+    opacity: 0.2; 
 }
+
 .admin{
     display: flex;
     flex-direction: column-reverse;
     align-items: flex-end;
+    color: #cdcdcd;
+    text-decoration: none;
 }
 
