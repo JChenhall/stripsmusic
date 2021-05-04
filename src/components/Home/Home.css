@@ -1,0 +1,105 @@
+
+
+.homeScreenContainer {
+    height: 100vh;
+    width:100vw;
+    background-image: url("../../assets/images/mountain.png");
+    background-size: cover;
+    color: #fff;
+    overflow: hidden;
+}
+
+.homeSection{
+    height:100%;
+    width:100%;
+}
+
+.topRow {
+height: 30%;
+display: flex;
+flex-flow: row wrap;
+justify-content: flex-start;
+}
+.middleRow{
+    height: 30%;
+    
+}
+.bottomRow{
+    height: 30%; 
+}
+
+.Logo{
+   height: fit-content;
+   width: fit-content;
+}
+
+
+.leftCol {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    text-align: center;
+}
+.Left{
+    display: flex;
+    flex-direction: row;
+    padding-right: 20%;
+    line-height: 0.9;
+}
+
+.rightCol {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    text-align: center;
+}
+.Right{
+    display: flex;
+    flex-direction: row;
+    padding-left: 20%;
+    line-height: 0.9;
+}
+
+
+
+.pageLink {
+    margin-bottom: 0;
+}
+
+.ArrowLeft {
+    height:38px;
+    width:38px;
+    margin-right:10px;
+}
+
+.ArrowRight{
+    height:38px;
+    width:38px;
+    margin-left:10px;
+}
+
+.DownArrow {
+    height:38px;
+    width:38px;
+    margin-top:10px;
+}
+
+.Down{
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.adminRow{
+    height:10%;
+    color: #cdcdcd;
+    opacity: 0.1; 
+}
+.admin{
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: flex-end;
+}
+
