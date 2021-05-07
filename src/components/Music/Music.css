@@ -33,29 +33,48 @@
 }
 
 .sideBar{
-    color: red;
+    color: white;
     background-color: #221F1F;
+}
+.searchHeader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.searchBarDiv{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.searchBar{
+    width: 50%;
+    border-radius: 20px;
+    align-items: center;
+    background-color: rgb(199, 195, 195);
 }
 
 .albumDiv{
     display: flex;
-    height: 100vh;
-   
+    height: 80vh;
+    width: 25.5vw;
     flex-direction: column;
     align-items: center;
-    overflow:auto;
-    margin-top: 5px;
+    overflow-y:scroll;
 }
+
 .albumList{
-    margin-top: 10px;
-    height: 30%;
-   
+    margin-top: 20px;
+    height: 35%;
 }
 
 .logoMusic{
-    position: static;
+    width: 70%;
+}
+
+.logoBox {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 70%;
 }
