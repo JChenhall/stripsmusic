@@ -1,0 +1,80 @@
+.musicContainer {
+    height: 100vh;
+    width:100vw;
+    overflow: hidden;
+}
+
+.musicRow{
+    padding-left: 0; 
+    padding-right: 0; 
+}
+
+.backdrop{
+    position: absolute;
+    height: 100%;
+    width:100%;
+     
+}
+
+.displayAlbum{
+    position: relative;
+    width:fit-content;
+    -webkit-transform : rotate(-15.5deg) scale(1.4); /* Chrome, Opera 15+, Safari 3.1+ */
+    -ms-transform     : rotate(-15.5deg) scale(1.4); /* IE 9 */
+    transform         : rotate(-15.5deg) scale(1.4); /* Firefox 16+, IE 10+, Opera */
+    top:22%;
+    left: 19%;
+    z-index: -1;
+    overflow: hidden;
+}
+
+.mainMusic{
+    color: red;
+}
+
+.sideBar{
+    color: white;
+    background-color: #221F1F;
+}
+.searchHeader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.searchBarDiv{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.searchBar{
+    width: 50%;
+    border-radius: 20px;
+    align-items: center;
+    background-color: rgb(199, 195, 195);
+}
+
+.albumDiv{
+    display: flex;
+    height: 80vh;
+    width: 25.5vw;
+    flex-direction: column;
+    align-items: center;
+    overflow-y:scroll;
+}
+
+.albumList{
+    margin-top: 20px;
+    height: 35%;
+}
+
+.logoMusic{
+    width: 70%;
+}
+
+.logoBox {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
