@@ -27,10 +27,9 @@ const AdminLogin = () => {
             
             <input type="text"
             name="details"
-            {...register("details", { required: <p className="loginAlert">"Please fill in both fields"</p> })} 
+            {...register("details", { required: "Please fill in both fields" })} 
             placeholder="  password"
             className= "logLine"
-            
             />
 
             <ErrorMessage
@@ -40,7 +39,7 @@ const AdminLogin = () => {
                 console.log("messages", messages);
                 return messages
                 ? Object.entries(messages).map(([type, message]) => (
-                <p key={type}>{message}</p>
+                <p key={type} className="loginAlert">{message} </p>
               ))
             : null;
         }}
