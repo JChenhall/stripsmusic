@@ -1,9 +1,9 @@
 import React from 'react';
-
+import { Link } from 'react-router-dom';
 import './AdminLogin.css';
 import {useForm } from 'react-hook-form';
 import { ErrorMessage } from "@hookform/error-message";
-
+import GoogleFontLoader from 'react-google-font-loader';
 const AdminLogin = () => {
     const { register, handleSubmit, formState: { errors } } = useForm({
         criteriaMode: "all"
@@ -12,7 +12,8 @@ const AdminLogin = () => {
 
     return (
         <section className= "adminBackground">
-        <form onSubmit={handleSubmit(onSubmit)} className="loginForm">
+          <GoogleFontLoader fonts={[{font: 'Roboto',weights: [400, '400i'],},{font: 'Roboto Mono',weights: [400, 700],},]}subsets={['cyrillic-ext', 'greek']}/>
+        <form onSubmit={handleSubmit(onSubmit)} className="loginForm" style={{ fontFamily: 'Roboto Mono, monospaced' }}>
             <div className="inputBox">
             <h2> Admin Portal</h2>
 
@@ -49,7 +50,7 @@ const AdminLogin = () => {
             <input type="submit" className="adminSubmit"/>
             </div>
         </form>
-            
+        <Link to="/adminsonglist"><h2 className="pageLink">admin song list</h2></Link>
         </section>
     )
 }
