@@ -35,7 +35,7 @@ const AdminSongList = () => {
             <h4 className="formTitle">EP Image</h4>
 
             <input 
-            type="image"
+            type="file"
             name="EPImage"
             className= "logLine"
             {...register("EPImage",  
@@ -84,7 +84,7 @@ const AdminSongList = () => {
             <h4 className="formTitle">Track Time</h4>
 
             <input 
-            type="time"
+            type="number"
             name="Time"
             className= "logLine"
             {...register("Time",  

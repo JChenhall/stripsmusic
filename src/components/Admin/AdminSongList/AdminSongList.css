@@ -22,6 +22,7 @@
 }
 
   .epInputBox {
+    color: white;
     display: flex;
     justify-content: space-evenly;
     flex-direction: column;
@@ -42,6 +43,7 @@
   }
 
   .trackInputBox {
+    color: white;
     display: flex;
     justify-content: space-evenly;
     flex-direction: column;
@@ -67,12 +69,20 @@
       border-radius: 20px;
   }
 
-  .adminSubmit{
+  .trackSubmit{
       width: 30%;
       height: 20%;
       font-size: large;
       border-radius: 20px;
       background-color: rgb(99, 151, 189);
+  }
+
+  .epSubmit{
+    width: 30%;
+    height: 15%;
+    font-size: large;
+    border-radius: 20px;
+    background-color: rgb(99, 151, 189);
   }
 
   .loginAlert {
