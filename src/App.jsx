@@ -4,6 +4,7 @@ import AdminLogin from './components/Admin/AdminLogin/AdminLogin.jsx';
 import Contact from './components/Contact/Contact.jsx';
 import Music from './components/Music/Music.jsx';
 import AdminSongList from './components/Admin/AdminSongList/AdminSongList';
+import AdminSongLibrary from './components/Admin/AdminSongLibrary/AdminSongLibrary';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
@@ -18,6 +19,7 @@ function App() {
           <Route path="/adminlogin" exact component={AdminLogin}/>
           <Route path="/about" exact component={About}/>
           <Route path="/adminsonglist" exact component={AdminSongList}/>
+          <Route path="/adminsonglibrary" exact component={AdminSongLibrary}/>
           <Route path="/" exact component={Home}/>
         </Switch>
     </section>

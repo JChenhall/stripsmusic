@@ -17,8 +17,7 @@
       align-items: center;
       flex-wrap: wrap;
       min-height: 100%;
-      width: 100%;
-      
+      width: 100%;     
     z-index: 1;
 }
 
@@ -30,16 +29,9 @@
     justify-content: center;
     align-items: center;
     margin: 40px;
-   
     transition: 0.5s;
     z-index: 2;
-
 }
-
-
-#emailForm{
- 
-            }
 
 #emailBox:before {
     content: '';
@@ -64,7 +56,6 @@
     left: -2px;
     right: -2px;
     bottom: -2px;
-    
     z-index: -1;
     filter:blur(40px);
                   }

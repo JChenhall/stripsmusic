@@ -51,6 +51,7 @@ const AdminLogin = () => {
             </div>
         </form>
         <Link to="/adminsonglist"><h2 className="pageLink">admin song list</h2></Link>
+        <Link to="/adminsonglibrary"><h2 className="pageLink">admin song library</h2></Link>
         </section>
     )
 }

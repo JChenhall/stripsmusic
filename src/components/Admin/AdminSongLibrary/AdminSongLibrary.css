@@ -1,0 +1,71 @@
+.libraryPage {
+    background-image: url(../../../assets/images/adminsplash.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.libraryTab{
+    color: white;
+    display: flex;
+    justify-content:space-evenly;
+    flex-direction: column;
+    align-items: center;
+    width: 70%;
+    height: 40%;
+    background: rgba( 42, 125, 184, 0.30 );
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+    backdrop-filter: blur( 12.0px );
+    -webkit-backdrop-filter: blur( 12.0px );
+    border-radius: 10px;
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
+
+}
+
+.EPSelector{
+    display: flex;
+    width:30%;
+    height: 10%;
+    border-radius: 20px;
+    font-size: larger;
+    background: rgba( 42, 125, 184, 0.30 );
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+    backdrop-filter: blur( 12.0px );
+    -webkit-backdrop-filter: blur( 12.0px );
+    border-radius: 10px;
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
+    color: #fff;
+}
+
+.track {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width:70%;
+    
+    border-bottom: rgb(255, 255, 255, 0.18) 2px solid;
+}
+
+.buttonBox {
+    display: flex;
+    width:20%;
+    height:90%;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.edit{
+    width: 40%;
+    background-color: royalblue;
+    border-radius:20px ;
+}
+
+.delete {
+    width: 40%;
+    background-color: red;
+    border-radius:20px ;
+}
