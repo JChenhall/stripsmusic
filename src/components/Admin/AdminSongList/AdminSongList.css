@@ -1,0 +1,95 @@
+.adminListBackground {
+    background-image: url(../../../assets/images/adminsplash.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+    width: 100vw;
+}
+
+
+.loginForm {
+    height: 60vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 800px;
+    margin: 0 auto;
+    padding-top: 10vh;
+  }
+
+.formTitle{
+    font-size: 1rem;
+}
+
+  .epInputBox {
+    color: white;
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column;
+    align-items: center;
+    width: 80%;
+    height: 30%;
+    border-radius: 30px;
+    border: 1px solid rgb(170, 163, 163);
+    background: rgba( 42, 125, 184, 0.30 );
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+    backdrop-filter: blur( 12.0px );
+    -webkit-backdrop-filter: blur( 12.0px );
+    border-radius: 10px;
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
+    padding: 10px 15px;
+    margin-bottom: 10px;
+    font-size: 14px;
+  }
+
+  .trackInputBox {
+    color: white;
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column;
+    align-items: center;
+    width: 80%;
+    height: 50%;
+    border-radius: 30px;
+    border: 1px solid rgb(170, 163, 163);
+    background: rgba( 42, 125, 184, 0.30 );
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+    backdrop-filter: blur( 12.0px );
+    -webkit-backdrop-filter: blur( 12.0px );
+    border-radius: 10px;
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
+    padding: 10px 15px;
+    margin-bottom: 10px;
+    font-size: 14px;
+  }
+
+  .logLine{
+      width: 80%;
+      height: 15%;
+      border-radius: 20px;
+  }
+
+  .trackSubmit{
+      width: 30%;
+      height: 20%;
+      font-size: large;
+      border-radius: 20px;
+      background-color: rgb(99, 151, 189);
+  }
+
+  .epSubmit{
+    width: 30%;
+    height: 15%;
+    font-size: large;
+    border-radius: 20px;
+    background-color: rgb(99, 151, 189);
+  }
+
+  .loginAlert {
+    color: #df0d0d;
+  }
+  
+  .loginAlert::before {
+    display: inline;
+    content: "⚠ ";
+  }
