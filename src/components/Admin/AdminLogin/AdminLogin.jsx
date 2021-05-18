@@ -1,8 +1,6 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
-
-import { auth, firestore } from "../../../firebase.js";
-
+import { Link } from "@reach/router";
+import { auth } from "../../../firebase.js";
 import './AdminLogin.css';
 
 import GoogleFontLoader from 'react-google-font-loader';
@@ -12,9 +10,14 @@ const AdminLogin = () => {
   const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState(null);
-    const signInWithEmailAndPasswordHandler = 
-            (event,email, password) => {
-                event.preventDefault();
+
+
+    const signInWithEmailAndPasswordHandler = (event,email, password) => {
+          event.preventDefault();
+          auth.signInWithEmailAndPassword(email, password).catch(error => {
+          setError("Error signing in with password and email!");
+            console.error("Error signing in with password and email", error);
+                });
     };
 
       const onChangeHandler = (event) => {
@@ -29,17 +32,17 @@ const AdminLogin = () => {
       };
 
   return (
-    <div className="mt-8">
-      <h1 className="text-3xl mb-2 text-center font-bold">Admin Sign In</h1>
-      <div className="border border-blue-400 mx-auto w-11/12 md:w-2/4 rounded py-8 px-4 md:px-8">
-        {error !== null && <div className = "py-4 bg-red-600 w-full text-white text-center mb-3">{error}</div>}
-        <form className="">
-          <label htmlFor="userEmail" className="block">
+    <div className="1">
+      <h1 className="2">Admin Sign In</h1>
+      <div className="3">
+        {error !== null && <div className = "4">{error}</div>}
+        <form className="5">
+          <label htmlFor="userEmail" className="6">
             Email:
           </label>
           <input
             type="email"
-            className="my-1 p-1 w-full"
+            className="7"
             name="userEmail"
             value = {email}
             placeholder="E.g: email@gmail.com"
@@ -65,7 +68,7 @@ const AdminLogin = () => {
         </form>
         <p className="text-center my-3">
           <br />{" "}
-          <Link to = "passwordReset" className="text-blue-500 hover:text-blue-600">
+          <Link to = "/adminhome" className="text-blue-500 hover:text-blue-600">
             Forgot Password?
           </Link>
         </p>

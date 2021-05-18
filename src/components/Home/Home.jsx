@@ -6,7 +6,7 @@ import DownArrow from "../../assets/images/downArrow.png";
 import './Home.css';
 import GoogleFontLoader from 'react-google-font-loader';
 import {Container, Row, Col } from 'react-bootstrap'
-import { Link } from 'react-router-dom';
+import { Link } from '@reach/router';
 
 const Home = () => {
     return (
