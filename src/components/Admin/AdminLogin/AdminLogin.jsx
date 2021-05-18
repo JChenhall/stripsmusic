@@ -1,59 +1,80 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+
+import { auth, firestore } from "../../../firebase.js";
+
 import './AdminLogin.css';
-import {useForm } from 'react-hook-form';
-import { ErrorMessage } from "@hookform/error-message";
+
 import GoogleFontLoader from 'react-google-font-loader';
+
 const AdminLogin = () => {
-    const { register, handleSubmit, formState: { errors } } = useForm({
-        criteriaMode: "all"
-      });
-    const onSubmit = data => console.log(data);
+  
+  const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [error, setError] = useState(null);
+    const signInWithEmailAndPasswordHandler = 
+            (event,email, password) => {
+                event.preventDefault();
+    };
 
-    return (
-        <section className= "adminBackground">
-          <GoogleFontLoader fonts={[{font: 'Roboto',weights: [400, '400i'],},{font: 'Roboto Mono',weights: [400, 700],},]}subsets={['cyrillic-ext', 'greek']}/>
-        <form onSubmit={handleSubmit(onSubmit)} className="loginForm" style={{ fontFamily: 'Roboto Mono, monospaced' }}>
-            <div className="inputBox">
-            <h2> Admin Portal</h2>
+      const onChangeHandler = (event) => {
+          const {name, value} = event.currentTarget;
 
-            <input 
-            type="text"
-            placeholder="  username"
-            name="username"
-            className= "logLine"
-            {...register("username",  
-            { required: true,  maxLength: 20 })} 
-            />
-            
-            <input type="text"
-            name="details"
-            {...register("details", { required: "Please fill in both fields" })} 
-            placeholder="  password"
-            className= "logLine"
-            />
+          if(name === 'userEmail') {
+              setEmail(value);
+          }
+          else if(name === 'userPassword'){
+            setPassword(value);
+          }
+      };
 
-            <ErrorMessage
-                errors={errors}
-                name="details"
-                render={({ messages }) => {
-                console.log("messages", messages);
-                return messages
-                ? Object.entries(messages).map(([type, message]) => (
-                <p key={type} className="loginAlert">{message} </p>
-              ))
-            : null;
-        }}
-      />
-            <p>forgotten password</p>
-
-            <input type="submit" className="adminSubmit"/>
-            </div>
+  return (
+    <div className="mt-8">
+      <h1 className="text-3xl mb-2 text-center font-bold">Admin Sign In</h1>
+      <div className="border border-blue-400 mx-auto w-11/12 md:w-2/4 rounded py-8 px-4 md:px-8">
+        {error !== null && <div className = "py-4 bg-red-600 w-full text-white text-center mb-3">{error}</div>}
+        <form className="">
+          <label htmlFor="userEmail" className="block">
+            Email:
+          </label>
+          <input
+            type="email"
+            className="my-1 p-1 w-full"
+            name="userEmail"
+            value = {email}
+            placeholder="E.g: email@gmail.com"
+            id="userEmail"
+            onChange = {(event) => onChangeHandler(event)}
+          />
+          <label htmlFor="userPassword" className="block">
+            Password:
+          </label>
+          <input
+            type="password"
+            className="mt-1 mb-3 p-1 w-full"
+            name="userPassword"
+            value = {password}
+            placeholder="Your Password"
+            id="userPassword"
+            onChange = {(event) => onChangeHandler(event)}
+          />
+          <button className="bg-green-400 hover:bg-green-500 w-full py-2 text-white" onClick = {(event) => {signInWithEmailAndPasswordHandler(event, email, password)}}>
+            Sign in
+          </button>
+          
         </form>
-        <Link to="/adminsonglist"><h2 className="pageLink">admin song list</h2></Link>
-        <Link to="/adminsonglibrary"><h2 className="pageLink">admin song library</h2></Link>
-        </section>
-    )
-}
+        <p className="text-center my-3">
+          <br />{" "}
+          <Link to = "passwordReset" className="text-blue-500 hover:text-blue-600">
+            Forgot Password?
+          </Link>
+        </p>
+      </div>
+    </div>
+  );
+};
 
-export default AdminLogin
+    
+
+
+export default AdminLogin;

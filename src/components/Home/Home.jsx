@@ -7,6 +7,7 @@ import './Home.css';
 import GoogleFontLoader from 'react-google-font-loader';
 import {Container, Row, Col } from 'react-bootstrap'
 import { Link } from 'react-router-dom';
+
 const Home = () => {
     return (
         <Container fluid className="homeScreenContainer">
