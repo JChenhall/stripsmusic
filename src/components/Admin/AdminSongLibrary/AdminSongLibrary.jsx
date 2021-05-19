@@ -7,7 +7,7 @@ const AdminSongLibrary = () => {
             <GoogleFontLoader fonts={[{font: 'Roboto',weights: [400, '400i'],},{font: 'Roboto Mono',weights: [400, 700],},]}subsets={['cyrillic-ext', 'greek']}/>
             <div className="libraryTab" style={{ fontFamily: 'Roboto Mono, monospaced' }}>
             
-            <h1 for="epSelecting">Select an EP/Album</h1>
+            <h1 htmlFor="epSelecting">Select an EP/Album</h1>
                 <select className="EPSelector">
                     <option value="EP1">EP1</option>
                     <option value="EP2">EP2</option>

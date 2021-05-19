@@ -1,5 +1,3 @@
-
-
 import AdminApplication from "./components/Admin/AdminApplication/Application";
 import UserProvider from "./context/UserProvider";
 

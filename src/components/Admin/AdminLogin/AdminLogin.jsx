@@ -15,8 +15,8 @@ const AdminLogin = () => {
     const signInWithEmailAndPasswordHandler = (event,email, password) => {
           event.preventDefault();
           auth.signInWithEmailAndPassword(email, password).catch(error => {
-          setError("Error signing in with password and email!");
-            console.error("Error signing in with password and email", error);
+          setError(" ⚠ Your email and/or password is not recognised, please try again.");
+            console.error("ERROR, EMAIL AND/OR PASSWORD WRONG", error);
                 });
     };
 
@@ -32,43 +32,46 @@ const AdminLogin = () => {
       };
 
   return (
-    <div className="1">
-      <h1 className="2">Admin Sign In</h1>
-      <div className="3">
-        {error !== null && <div className = "4">{error}</div>}
-        <form className="5">
-          <label htmlFor="userEmail" className="6">
+    <div className="adminBackground" style={{ fontFamily: 'Roboto Mono, monospaced' }}>
+      <GoogleFontLoader fonts={[{font: 'Roboto',weights: [400, '400i'],},{font: 'Roboto Mono',weights: [400, 700],},]}subsets={['cyrillic-ext', 'greek']}/>
+      <h1 className="adminTitle">Admin Sign In</h1>
+      <div className="musicForm">
+        <form className="inputBox">
+          <label htmlFor="userEmail" className="logTitle">
             Email:
           </label>
           <input
             type="email"
-            className="7"
+            className="adminLogLine"
             name="userEmail"
             value = {email}
-            placeholder="E.g: email@gmail.com"
+            placeholder="    E.g: email@gmail.com"
             id="userEmail"
             onChange = {(event) => onChangeHandler(event)}
           />
-          <label htmlFor="userPassword" className="block">
+          <label htmlFor="userPassword" className="logTitle">
             Password:
           </label>
           <input
             type="password"
-            className="mt-1 mb-3 p-1 w-full"
+            className="adminLogLine"
             name="userPassword"
             value = {password}
-            placeholder="Your Password"
+            placeholder="    Your Password"
             id="userPassword"
             onChange = {(event) => onChangeHandler(event)}
           />
-          <button className="bg-green-400 hover:bg-green-500 w-full py-2 text-white" onClick = {(event) => {signInWithEmailAndPasswordHandler(event, email, password)}}>
+
+          {error !== null && <div className = "errorMessage">{error}</div>}
+
+          <button className="adminSubmit" onClick = {(event) => {signInWithEmailAndPasswordHandler(event, email, password)}}>
             Sign in
           </button>
           
         </form>
         <p className="text-center my-3">
           <br />{" "}
-          <Link to = "/adminhome" className="text-blue-500 hover:text-blue-600">
+          <Link to = "/adminpasswordreset" className="text-blue-500 hover:text-blue-600">
             Forgot Password?
           </Link>
         </p>
@@ -76,8 +79,5 @@ const AdminLogin = () => {
     </div>
   );
 };
-
-    
-
 
 export default AdminLogin;
