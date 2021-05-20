@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Router } from '@reach/router';
+import { Router, Redirect } from '@reach/router';
 import AdminHome from '../AdminHome/AdminHome';
 import AdminLogin from '../AdminLogin/AdminLogin';
 import Home from '../../Home/Home';
@@ -17,26 +17,36 @@ function Application() {
 
   return (
     
-
         user ?
+
         <>
-        <AdminHome />
-        <Router>
-        <AdminSongList path="#/adminsonglist" />
-        <AdminSongLibrary path="#/adminsonglibrary" />
-        </Router>
-        </>
+          <Router>
+          <Redirect from="/adminlogin" to="/adminhome" noThrow />
+          <AdminHome path="/adminhome"/>
+          <AdminSongList path="/adminhome/adminsonglist"/>
+          <AdminSongLibrary path="/adminhome/adminsonglibrary"/>
+          <Music path="/music" />
+              <Contact path="/contact" />
+              <AdminLogin path="/adminlogin" />
+              <About path="/about" />
+              <AdminPasswordReset path="/adminpasswordreset" />
+              <Home path="/"/>
+          </Router>
+       </>
+
       :
       
-      
-        <Router>
-            <Music path="/music" />
-            <Contact path="/contact" />
-            <AdminLogin path="/adminlogin" />
-            <About path="/about" />
-            <AdminPasswordReset path="/adminpasswordreset" />
-            <Home path="/"/>
-          </Router>
+        <>
+          <Router>
+          <Redirect from="/adminhome" to="/" noThrow />
+              <Music path="/music" />
+              <Contact path="/contact" />
+              <AdminLogin path="/adminlogin" />
+              <About path="/about" />
+              <AdminPasswordReset path="/adminpasswordreset" />
+              <Home path="/"/>
+            </Router>
+        </>
       
   );
 }

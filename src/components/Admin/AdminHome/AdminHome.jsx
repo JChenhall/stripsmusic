@@ -1,10 +1,10 @@
 import React, { useContext } from 'react'
 import { UserContext } from "../../../context/UserProvider";
-import { Link, navigate } from "@reach/router";
+import { Link } from "@reach/router";
 import {auth} from "../../../firebase";
 import './AdminHome.css';
 import GoogleFontLoader from 'react-google-font-loader';
-import AdminSongList from '../AdminSongList/AdminSongList';
+
 
 
 const AdminHome = () => {
@@ -17,7 +17,8 @@ const AdminHome = () => {
           <GoogleFontLoader fonts={[{font: 'Roboto',weights: [400, '400i'],},{font: 'Roboto Mono',weights: [400, 700],},]}subsets={['cyrillic-ext', 'greek']}/>
 
           <nav>
-          <Link to ="#/adminsonglist">AdminSongList</Link>
+          <Link to ="adminsonglist">AdminSongList</Link>
+          <Link to ="adminsonglibrary">AdminSongLibrary</Link>
           </nav>
 
           <div className="userDetailBox" >
@@ -27,7 +28,6 @@ const AdminHome = () => {
             <h3 className = "stats">{email}</h3>
             </div>
           </div>
-            
          
           <button className = "signOutButton" onClick = {() => {auth.signOut()}}>Sign out</button>
         </div>
