@@ -9,6 +9,7 @@ import Music from '../../Music/Music';
 import AdminSongList from '../AdminSongList/AdminSongList';
 import AdminSongLibrary from '../AdminSongLibrary/AdminSongLibrary.jsx';
 import AdminPasswordReset from '../AdminPasswordReset/AdminPasswordReset';
+import ViewMusic from '../../ViewMusic/ViewMusic';
 import { UserContext } from "../../../context/UserProvider";
 
 function Application() {
@@ -25,7 +26,8 @@ function Application() {
           <AdminHome path="/adminhome"/>
           <AdminSongList path="/adminhome/adminsonglist"/>
           <AdminSongLibrary path="/adminhome/adminsonglibrary"/>
-          <Music path="/music" />
+              <Music path="/music" />
+              <ViewMusic path ="/viewmusic"/>
               <Contact path="/contact" />
               <AdminLogin path="/adminlogin" />
               <About path="/about" />
@@ -40,6 +42,7 @@ function Application() {
           <Router>
           <Redirect from="/adminhome" to="/" noThrow />
               <Music path="/music" />
+              <ViewMusic path ="/viewmusic"/>
               <Contact path="/contact" />
               <AdminLogin path="/adminlogin" />
               <About path="/about" />

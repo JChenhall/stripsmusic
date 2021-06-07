@@ -1,7 +1,7 @@
 import firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/firestore";
-
+import "firebase/storage";
   // Your web app's Firebase configuration
   // For Firebase JS SDK v7.20.0 and later, measurementId is optional
   var firebaseConfig = {
@@ -14,7 +14,6 @@ import "firebase/firestore";
     measurementId: "G-JTVKLVV8LE"
   };
   // Initialize Firebase
-  
 
   export const generateUserDocument = async (user, additionalData) => {
     if (!user) return;
@@ -35,6 +34,7 @@ import "firebase/firestore";
     }
     return getUserDocument(user.uid);
   };
+
   const getUserDocument = async uid => {
     if (!uid) return null;
     try {
@@ -48,6 +48,8 @@ import "firebase/firestore";
     }
   };
 
+
   firebase.initializeApp(firebaseConfig);
   export const auth = firebase.auth();
   export const firestore = firebase.firestore();
+  export const storage = firebase.storage();

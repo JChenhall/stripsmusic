@@ -41,6 +41,7 @@ const Home = () => {
                 </Row>
                 <Row className="adminRow">
                     <Link to="/adminlogin" className="admin">Admin</Link>
+                    <Link to="/viewmusic" className="admin">viewmusic</Link>
                 </Row>
         </Container>
     )
