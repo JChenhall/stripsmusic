@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import { createSong, createEP, getAllSongs, getAllEPs, deleteSong, deleteEP } from "../../../context/music.provider.js";
 import './AdminSongList.css';
 import {useForm } from 'react-hook-form';
 import GoogleFontLoader from 'react-google-font-loader';
 import { storage, firestore } from "../../../firebase";
+
+
+let EPInfo;
 
 const AdminSongList = () => {
     const { register, handleSubmit, formState: { errors } } = useForm({
@@ -48,13 +51,36 @@ const AdminSongList = () => {
     const songCreation = createSong(data, url);
 };
   
+//GETTING EP INFO FOR SELECT
+const [loading, setLoading] = useState(false);
 
+const getEPInfo =  async () => {
+  await firestore
+    .collection("eplist")
+    .doc('EP1')
+    .get()
+    .then((response) => {
+      EPInfo = response.data();
+      setLoading(true)
+      return EPInfo;
+    });
+};
+
+useEffect(() => { 
+  const letsGo = async () => {
+    await getEPInfo();
+  }
+  letsGo();
+}, []);
 
     return (
+      <>
+      { loading &&
         <section className="adminListBackground">
              <GoogleFontLoader fonts={[{font: 'Roboto',weights: [400, '400i'],},{font: 'Roboto Mono',weights: [400, 700],},]}subsets={['cyrillic-ext', 'greek']}/>
-         {/* EP upload */}    
-        <form key={1} onSubmit={handleSubmit(onSubmitEP)} className="musicForm" style={{ fontFamily: 'Roboto Mono, monospaced' }}>
+         {/* EP upload */}   
+         <div className="musicFormContainer">
+        <form key={1} onSubmit={handleSubmit(onSubmitEP)} className="musicSelectForm" style={{ fontFamily: 'Roboto Mono, monospaced' }}>
 
             <div className="epInputBox">
 
@@ -97,20 +123,22 @@ const AdminSongList = () => {
             </form>
             
            {/* SONG upload */}
-            <form key={2} onSubmit={handleSubmit2(onSubmitSong)} className="musicForm" style={{ fontFamily: 'Roboto Mono, monospaced' }}>
+            <form key={2} onSubmit={handleSubmit2(onSubmitSong)} className="musicSelectForm" style={{ fontFamily: 'Roboto Mono, monospaced' }}>
            
             <div className="trackInputBox">
             
             <h4 className="formTitle">EP Select</h4>
         
-            {/* <input 
-            type="select"
+            <select
             placeholder="  Select an EP"
             name="epSelect"
             className= "logLine"
             {...register2("epSelect",  
-            { required: true })} 
-            /> */}
+            { required: true })} >
+                <option>{EPInfo.data.EPTitle}</option>
+            </select>
+            
+            
 
             <h4 className="formTitle">Track Title</h4>
 
@@ -203,9 +231,14 @@ const AdminSongList = () => {
             <input type="submit" className="trackSubmit"/>
             </div>
         </form>       
+        </div> 
         
         </section>
+}
+        </>
+        
         )
+      
 }
 
 export default AdminSongList
