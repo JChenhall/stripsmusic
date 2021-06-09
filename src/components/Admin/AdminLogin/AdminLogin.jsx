@@ -1,59 +1,84 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from "react";
+import { Link } from "@reach/router";
+import { auth } from "../../../firebase.js";
 import './AdminLogin.css';
-import {useForm } from 'react-hook-form';
-import { ErrorMessage } from "@hookform/error-message";
+
 import GoogleFontLoader from 'react-google-font-loader';
+
 const AdminLogin = () => {
-    const { register, handleSubmit, formState: { errors } } = useForm({
-        criteriaMode: "all"
-      });
-    const onSubmit = data => console.log(data);
+  
+  const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [error, setError] = useState(null);
 
-    return (
-        <section className= "adminBackground">
-          <GoogleFontLoader fonts={[{font: 'Roboto',weights: [400, '400i'],},{font: 'Roboto Mono',weights: [400, 700],},]}subsets={['cyrillic-ext', 'greek']}/>
-        <form onSubmit={handleSubmit(onSubmit)} className="loginForm" style={{ fontFamily: 'Roboto Mono, monospaced' }}>
-            <div className="inputBox">
-            <h2> Admin Portal</h2>
 
-            <input 
-            type="text"
-            placeholder="  username"
-            name="username"
-            className= "logLine"
-            {...register("username",  
-            { required: true,  maxLength: 20 })} 
-            />
-            
-            <input type="text"
-            name="details"
-            {...register("details", { required: "Please fill in both fields" })} 
-            placeholder="  password"
-            className= "logLine"
-            />
+    const signInWithEmailAndPasswordHandler = (event,email, password) => {
+          event.preventDefault();
+          auth.signInWithEmailAndPassword(email, password).catch(error => {
+          setError(" ⚠ Your email and/or password is not recognised, please try again.");
+            console.error("ERROR, EMAIL AND/OR PASSWORD WRONG", error);
+                });
+    };
 
-            <ErrorMessage
-                errors={errors}
-                name="details"
-                render={({ messages }) => {
-                console.log("messages", messages);
-                return messages
-                ? Object.entries(messages).map(([type, message]) => (
-                <p key={type} className="loginAlert">{message} </p>
-              ))
-            : null;
-        }}
-      />
-            <p>forgotten password</p>
+      const onChangeHandler = (event) => {
+          const {name, value} = event.currentTarget;
 
-            <input type="submit" className="adminSubmit"/>
-            </div>
+          if(name === 'userEmail') {
+              setEmail(value);
+          }
+          else if(name === 'userPassword'){
+            setPassword(value);
+          }
+      };
+
+  return (
+    <div className="adminBackground" style={{ fontFamily: 'Roboto Mono, monospaced' }}>
+      <GoogleFontLoader fonts={[{font: 'Roboto',weights: [400, '400i'],},{font: 'Roboto Mono',weights: [400, 700],},]}subsets={['cyrillic-ext', 'greek']}/>
+      <h1 className="adminTitle">Admin Sign In</h1>
+      
+      <div className="musicForm">
+        <form className="inputBox">
+          <label htmlFor="userEmail" className="logTitle">
+            Email:
+          </label>
+          <input
+            type="email"
+            className="adminLogLine"
+            name="userEmail"
+            value = {email}
+            placeholder="    E.g: email@gmail.com"
+            id="userEmail"
+            onChange = {(event) => onChangeHandler(event)}
+          />
+          <label htmlFor="userPassword" className="logTitle">
+            Password:
+          </label>
+          <input
+            type="password"
+            className="adminLogLine"
+            name="userPassword"
+            value = {password}
+            placeholder="    Your Password"
+            id="userPassword"
+            onChange = {(event) => onChangeHandler(event)}
+          />
+
+          {error !== null && <div className = "errorMessage">{error}</div>}
+
+          <button className="adminSubmit" onClick = {(event) => {signInWithEmailAndPasswordHandler(event, email, password)}}>
+            Sign in
+          </button>
+          
         </form>
-        <Link to="/adminsonglist"><h2 className="pageLink">admin song list</h2></Link>
-        <Link to="/adminsonglibrary"><h2 className="pageLink">admin song library</h2></Link>
-        </section>
-    )
-}
+        <p className="text-center my-3">
+          <br />{" "}
+          <Link to = "/adminpasswordreset" className="text-blue-500 hover:text-blue-600">
+            Forgot Password?
+          </Link>
+        </p>
+      </div>
+    </div>
+  );
+};
 
-export default AdminLogin
+export default AdminLogin;

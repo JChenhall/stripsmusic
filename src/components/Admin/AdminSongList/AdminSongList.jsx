@@ -1,22 +1,86 @@
-import React from 'react';
+import React, { useState, useEffect } from "react";
 
+import { createSong, createEP, getAllSongs, getAllEPs, deleteSong, deleteEP } from "../../../context/music.provider.js";
 import './AdminSongList.css';
 import {useForm } from 'react-hook-form';
-import { ErrorMessage } from "@hookform/error-message";
 import GoogleFontLoader from 'react-google-font-loader';
+import { storage, firestore } from "../../../firebase";
 
+
+let EPInfo;
 
 const AdminSongList = () => {
-
     const { register, handleSubmit, formState: { errors } } = useForm({
         criteriaMode: "all"
       });
-    const onSubmit = data => console.log(data);
+
+    const { register: register2, handleSubmit: handleSubmit2, formState: { errors: errors2 } } = useForm({
+        criteriaMode: "all"
+      });
+    
+    const [image, setImg] = useState(null);
+    const [url, setUrl] = useState('');
+    
+
+      //image upload
+    const handleChange = (e) => {
+    if(e.target.files[0].size < 3 * 1024 * 1024){
+      console.log(e.target.files[0])
+      setImg(e.target.files[0]);
+      console.log("image is",image)
+
+      const uploadTask = storage.ref(`images/${e.target.files[0].name}`).put(e.target.files[0]);
+      uploadTask.on("state_changed", snapshot => {
+                }, error => {
+                  alert(error.message);
+                }, () => {
+                  storage.ref("images").child(e.target.files[0].name).getDownloadURL().then(url => {
+                    setUrl(url)
+                  })
+                })
+    } else{
+      alert("Image too large");
+    }
+  } 
+
+  const onSubmitEP = (data) => {
+      const epCreation = createEP(data, url);
+  };
+
+  const onSubmitSong = (data) => {
+    const songCreation = createSong(data, url);
+};
+  
+//GETTING EP INFO FOR SELECT
+const [loading, setLoading] = useState(false);
+
+const getEPInfo =  async () => {
+  await firestore
+    .collection("eplist")
+    .doc('EP1')
+    .get()
+    .then((response) => {
+      EPInfo = response.data();
+      setLoading(true)
+      return EPInfo;
+    });
+};
+
+useEffect(() => { 
+  const letsGo = async () => {
+    await getEPInfo();
+  }
+  letsGo();
+}, []);
 
     return (
+      <>
+      { loading &&
         <section className="adminListBackground">
              <GoogleFontLoader fonts={[{font: 'Roboto',weights: [400, '400i'],},{font: 'Roboto Mono',weights: [400, 700],},]}subsets={['cyrillic-ext', 'greek']}/>
-        <form onSubmit={handleSubmit(onSubmit)} className="musicForm" style={{ fontFamily: 'Roboto Mono, monospaced' }}>
+         {/* EP upload */}   
+         <div className="musicFormContainer">
+        <form key={1} onSubmit={handleSubmit(onSubmitEP)} className="musicSelectForm" style={{ fontFamily: 'Roboto Mono, monospaced' }}>
 
             <div className="epInputBox">
 
@@ -33,13 +97,13 @@ const AdminSongList = () => {
             />
 
             <h4 className="formTitle">EP Image</h4>
-
+            <div className="imagepreview">{url && <img src={url} />}</div>
             <input 
             type="file"
-            name="EPImage"
+            name="imageUrl"
+            accept="image/x-png,image/gif,image/jpeg,image/PNG,"
             className= "logLine"
-            {...register("EPImage",  
-            { required: true })} 
+            onChange={handleChange}
             />
 
             <h4 className="formTitle">EP Description</h4>
@@ -56,28 +120,34 @@ const AdminSongList = () => {
             <input type="submit" className="epSubmit"/>
 
             </div>
+            </form>
             
+           {/* SONG upload */}
+            <form key={2} onSubmit={handleSubmit2(onSubmitSong)} className="musicSelectForm" style={{ fontFamily: 'Roboto Mono, monospaced' }}>
+           
             <div className="trackInputBox">
             
             <h4 className="formTitle">EP Select</h4>
         
-            <input 
-            type="select"
+            <select
             placeholder="  Select an EP"
             name="epSelect"
             className= "logLine"
-            {...register("epSelect",  
-            { required: true })} 
-            />
+            {...register2("epSelect",  
+            { required: true })} >
+                <option>{EPInfo.data.EPTitle}</option>
+            </select>
+            
+            
 
             <h4 className="formTitle">Track Title</h4>
 
             <input 
             type="text"
             placeholder="  Title"
-            name="Title"
+            name="songTitle"
             className= "logLine"
-            {...register("Title",  
+            {...register2("songTitle",  
             { required: true })} 
             />
 
@@ -85,9 +155,10 @@ const AdminSongList = () => {
 
             <input 
             type="number"
-            name="Time"
+            step="0.01"
+            name="songTimer"
             className= "logLine"
-            {...register("Time",  
+            {...register2("songTimer",  
             { required: true })} 
             />
 
@@ -96,9 +167,9 @@ const AdminSongList = () => {
             <input 
             type="text"
             placeholder="  Description"
-            name="Description"
+            name="songInfo"
             className= "logLine"
-            {...register("Description",  
+            {...register2("songInfo",  
             { required: true })} 
             />
 
@@ -107,9 +178,9 @@ const AdminSongList = () => {
             <input 
             type="text"
             placeholder="  Spotify Link"
-            name="Spotify"
+            name="songSpotify"
             className= "logLine"
-            {...register("Spotify",  
+            {...register2("songSpotify",  
             { required: true })} 
             />
 
@@ -118,9 +189,9 @@ const AdminSongList = () => {
             <input 
             type="text"
             placeholder="  YouTube Video Link"
-            name="YouTubeVideo"
+            name="songYouTube"
             className= "logLine"
-            {...register("YouTubeVideo",  
+            {...register2("songYouTube",  
             { required: true })} 
             />
 
@@ -129,9 +200,9 @@ const AdminSongList = () => {
             <input 
             type="text"
             placeholder="  YouTube Music Link"
-            name="YouTubeMusic"
+            name="songYouTubeMusic"
             className= "logLine"
-            {...register("YouTubeMusic",  
+            {...register2("songYouTubeMusic",  
             { required: true })} 
             />
 
@@ -140,9 +211,9 @@ const AdminSongList = () => {
             <input 
             type="text"
             placeholder="  Amazon Music Link"
-            name="AmazonMusic"
+            name="songAmazon"
             className= "logLine"
-            {...register("AmazonMusic",  
+            {...register2("songAmazon",  
             { required: true })} 
             />
 
@@ -151,17 +222,23 @@ const AdminSongList = () => {
             <input 
             type="text"
             placeholder="  iTunes Music Link"
-            name="iTunesMusic"
+            name="songiTunes"
             className= "logLine"
-            {...register("iTunesMusic",  
+            {...register2("songiTunes",  
             { required: true })} 
             />
 
             <input type="submit" className="trackSubmit"/>
             </div>
-        </form>        
+        </form>       
+        </div> 
+        
         </section>
+}
+        </>
+        
         )
+      
 }
 
 export default AdminSongList
