@@ -50,6 +50,7 @@ const AdminSongList = () => {
   const onSubmitSong = (data) => {
     const songCreation = createSong(data, url);
 };
+
   
 //GETTING EP INFO FOR SELECT
 const [loading, setLoading] = useState(false);
@@ -57,18 +58,30 @@ const [loading, setLoading] = useState(false);
 const getEPInfo =  async () => {
   await firestore
     .collection("eplist")
-    .doc('EP1')
     .get()
-    .then((response) => {
-      EPInfo = response.data();
-      setLoading(true)
-      return EPInfo;
-    });
-};
+    .then((querySnapshot) => {
+        EPInfo = querySnapshot.docs.map(doc=> doc.data().data.EPTitle);
+        console.log(EPInfo);
+        console.log(loading);
+        setLoading(true)
+        return EPInfo;
+    }); 
+
+      var select = document.getElementById("selectTitle"); 
+      var options = EPInfo; 
+        for(var i = 0; i < options.length; i++) {
+          var opt = options[i];
+          var el = document.createElement("option");
+          el.text = opt;
+          el.value = opt;
+          select.add(el);}
+}
 
 useEffect(() => { 
   const letsGo = async () => {
+    
     await getEPInfo();
+    
   }
   letsGo();
 }, []);
@@ -76,6 +89,8 @@ useEffect(() => {
     return (
       <>
       { loading &&
+
+      
         <section className="adminListBackground">
              <GoogleFontLoader fonts={[{font: 'Roboto',weights: [400, '400i'],},{font: 'Roboto Mono',weights: [400, 700],},]}subsets={['cyrillic-ext', 'greek']}/>
          {/* EP upload */}   
@@ -126,16 +141,22 @@ useEffect(() => {
             <form key={2} onSubmit={handleSubmit2(onSubmitSong)} className="musicSelectForm" style={{ fontFamily: 'Roboto Mono, monospaced' }}>
            
             <div className="trackInputBox">
-            
+            {console.log(EPInfo)}
+            {console.log(loading)}
             <h4 className="formTitle">EP Select</h4>
-        
+            <h2>this is EPINFO= {EPInfo}</h2>
+
             <select
             placeholder="  Select an EP"
             name="epSelect"
+            id="selectTitle"
             className= "logLine"
             {...register2("epSelect",  
             { required: true })} >
-                <option>{EPInfo.data.EPTitle}</option>
+              
+                <option>Select an EP</option>
+                
+
             </select>
             
             

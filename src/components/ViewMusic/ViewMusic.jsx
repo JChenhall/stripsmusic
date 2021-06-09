@@ -11,7 +11,7 @@ const [loading, setLoading] = useState(false);
 const getSongInfo =  async () => {
     await firestore
       .collection("Songs")
-      .doc('hihg')
+      .doc('Dadshottrack1')
       .get()
       .then((response) => {
         songInfo = response.data();

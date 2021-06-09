@@ -60,7 +60,7 @@ import { firestore } from "../firebase";
       };
 
       export const addSongsToLibrary = (data) => {
-        var collectionRef = firestore
+        const collectionRef = firestore
           .collection("viewmusic")
           .doc('musiclibrary');
       
@@ -90,14 +90,14 @@ import { firestore } from "../firebase";
     };
 
     export const getAllSongs = () => {
-        var collectionRef = firestore.collection("Songs").get();
+      const collectionRef = firestore.collection("Songs").get();
         return collectionRef.then((response) => {
           return response.docs.map((doc) => doc.id);
         });
       };
 
       export const getAllEPs = () => {
-        var collectionRef = firestore.collection("eplist").get();
+        const collectionRef = firestore.collection("eplist").get();
         return collectionRef.then((response) => {
           return response.docs.map((doc) => doc.id);
         });
